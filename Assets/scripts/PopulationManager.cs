@@ -32,7 +32,8 @@ public class PopulationManager : MonoBehaviour
         {
             Vector3 startingPos = new Vector3(transform.position.x + Random.Range(-2, 2),
                 transform.position.y, transform.position.z + Random.Range(-2, 2));
-            GameObject b = Instantiate(botPrefab, startingPos, transform.rotation);
+            Debug.Log(startingPos);
+            GameObject b = Instantiate(botPrefab, startingPos, Quaternion.identity);
             b.GetComponent<Brain>().Init();
             population.Add(b);
         }
@@ -60,14 +61,13 @@ public class PopulationManager : MonoBehaviour
     private void BreedNewPopulation()
     {
         List<GameObject> sortedList = population.OrderBy(o => o.GetComponent<Brain>().timeAlive).ToList();
-
         population.Clear();
         for (int i = (int)(sortedList.Count / 2.0f) - 1; i < sortedList.Count - 1; i++)
         {
             population.Add(Breed(sortedList[i], sortedList[i + 1]));
             population.Add(Breed(sortedList[i + 1], sortedList[i]));
         }
-
+        Debug.LogWarning("**********************");
         for (int i = 0; i < sortedList.Count; i++)
         {
             Destroy(sortedList[i]);

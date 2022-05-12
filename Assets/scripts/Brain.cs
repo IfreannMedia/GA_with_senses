@@ -37,7 +37,7 @@ public class Brain : MonoBehaviour
     {
         if (!alive) return;
 
-        Debug.DrawRay(eyes.transform.position, eyes.transform.forward * 10, Color.red, 10);
+        Debug.DrawRay(eyes.transform.position, eyes.transform.forward * 10, Color.red, .2f);
         seeGround = false;
         RaycastHit hit;
         if(Physics.Raycast(eyes.transform.position, eyes.transform.forward * 10, out hit))
@@ -63,7 +63,7 @@ public class Brain : MonoBehaviour
             else if (dna.GetGene(1) == 2) h = 90;
         }
         transform.Translate(0, 0, v * 0.1f);
-        transform.Translate(0, h, 0);
+        transform.Rotate(0, h, 0);
     }
 }
 
