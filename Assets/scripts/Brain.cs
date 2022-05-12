@@ -6,6 +6,7 @@ public class Brain : MonoBehaviour
 {
     private int DNALength = 2;
     public float timeAlive;
+    public float timeWalking;
     public DNA dna;
     public GameObject eyes;
     private bool alive = true;
@@ -17,6 +18,8 @@ public class Brain : MonoBehaviour
         if (collision.gameObject.tag == "dead")
         {
             alive = false;
+            timeAlive = 0;
+            timeWalking = 0;
         }
     }
 
@@ -53,12 +56,12 @@ public class Brain : MonoBehaviour
         float v = 0;
         if (seeGround)
         {
-            if (dna.GetGene(0) == 0) v = 1;
+            if (dna.GetGene(0) == 0) { v = 1; timeWalking++; }
             else if (dna.GetGene(0) == 1) h = -90;
             else if (dna.GetGene(0) == 2) h = 90;
         } else
         {
-            if (dna.GetGene(1) == 0) v = 1;
+            if (dna.GetGene(1) == 0) { v = 1; timeWalking++; }
             else if (dna.GetGene(1) == 1) h = -90;
             else if (dna.GetGene(1) == 2) h = 90;
         }
