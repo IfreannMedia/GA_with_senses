@@ -12,6 +12,14 @@ public class Brain : MonoBehaviour
     private bool alive = true;
     private bool seeGround = true;
 
+    public GameObject ethanPrefab;
+    GameObject ethan;
+
+    private void OnDestroy()
+    {
+        Destroy(ethan);
+    }
+
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -34,6 +42,9 @@ public class Brain : MonoBehaviour
         dna = new DNA(DNALength, 3);
         timeAlive = 0;
         alive = true;
+
+        ethan = Instantiate(ethanPrefab, transform.position, transform.rotation);
+        ethan.GetComponent<UnityStandardAssets.Characters.ThirdPerson.AICharacterControl>().target = transform;
     }
 
     private void Update()
